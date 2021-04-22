@@ -1,4 +1,3 @@
-# %%
 import spacy
 import pandas as pd
 import csv
