@@ -13,7 +13,16 @@ Requirements:
 
 ```
 python -m pip venv .venv
+```
+The environment should be activated before any packages can be installed.
+On Mac:
+```
 source .venv/bin/activate
+```
+
+On Windows:
+```
+.venv\Scripts\activate
 ```
 
 ### Setting things up
@@ -45,7 +54,7 @@ POS tagging, the script first prints the 10 most common POS tags with their
 corresponding frequency. Next, the three most common and one of the least common
 tokens is printed, per POS tag. For the lemmatization, the script outputs the
 lemma and the token for the first 100 sentences. It requires manual work to
-choose a lemma with three different inflections. 
+choose a lemma with three different inflections.
 
 ### Part B
 Executing the file as a python script will print out appropriate output to the
@@ -76,3 +85,4 @@ As before, it is sufficient to run:
 python partC.py
 ```
 
+Note that you might run into memory issues. It is therefore advised to run partC.py on a cloud GPU such as Google Colab. 
