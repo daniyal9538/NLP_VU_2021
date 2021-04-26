@@ -97,17 +97,18 @@ def named_entity_recognition(dataset, nlp):
 
     for index, tweet in dataset['Tweet text'].iloc[:3].iteritems():
         doc = nlp(tweet)
+        print(doc.text)
         for ent in doc.ents:
             print(ent.text, ent.label_)
         # displacy.render(doc, style='ent')
 
 def main():
     nlp = spacy.load('en_core_web_sm')
-    dataset = pd.read_csv("C:/Users/Jaimie/Documents/VU/Master jaar 1/NLP Technology/Assignments/1/SemEval2018-Task3/datasets/train/SemEval2018-T3-train-taskB.txt", delimiter='\t',
+    dataset = pd.read_csv("https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/train/SemEval2018-T3-train-taskB.txt", delimiter='\t',
                           quoting=csv.QUOTE_NONE, error_bad_lines=False)
-    # POS_frequencies_coarse, POS_frequencies_fine, token_count_dict = frequencies(nlp, dataset)
-    # pos_tagging(POS_frequencies_coarse, POS_frequencies_fine, token_count_dict)
-    # lemmatization(dataset, nlp)
+    POS_frequencies_coarse, POS_frequencies_fine, token_count_dict = frequencies(nlp, dataset)
+    pos_tagging(POS_frequencies_coarse, POS_frequencies_fine, token_count_dict)
+    lemmatization(dataset, nlp)
     named_entity_recognition(dataset, nlp)
 
 if __name__ == '__main__':
