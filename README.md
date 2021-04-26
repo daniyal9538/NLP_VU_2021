@@ -3,7 +3,6 @@
 Authors: Jaimie R. Rutgers, Roberto Schiavone, Daniyal Selani
 
 ## Requirements
-Requirements:
 - Python 3.9.4
 - CUDA 11.1
 - an Internet connection
