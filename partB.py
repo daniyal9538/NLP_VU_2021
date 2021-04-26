@@ -3,6 +3,8 @@ import pandas as pd
 from sklearn.metrics import confusion_matrix, classification_report,accuracy_score
 import random
 import numpy as np
+import wget
+import os
 
 def warn(*args, **kwargs):
     pass
@@ -14,7 +16,15 @@ warnings.warn = warn
 nlp = spacy.load('en_core_web_sm')
 
 #read file
-file  = r'C:\Users\daniy\Documents\vu\nlp\SemEval2018-Task3\datasets\goldtest_TaskB\SemEval2018-T3_gold_test_taskB_emoji.txt'
+def downloadData():
+    url = 'https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/543ae83b0b093ab7ff4f2891ab7bccf6721d7e6d/datasets/train/SemEval2018-T3-train-taskB.txt'
+
+    # Download the file (if we haven't already)
+    if not os.path.exists('./SemEval2018-T3-train-taskB.txt'):
+        wget.download(url, './SemEval2018-T3-train-taskB.txt')
+
+downloadData()
+file = './SemEval2018-T3-train-taskB.txt'
 df = pd.read_csv(file, sep = '\t' )
 
 
