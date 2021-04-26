@@ -49,7 +49,7 @@ python partA.py
 
 ### Part B
 
-# COLA TEST SET HERE
+Executing the file as a python script will print out appropriate output to the python console with explanatory messages, that relate directly to the corrosponding section in the report
 
 ```
 python partB.py
