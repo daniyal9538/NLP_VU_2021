@@ -1,9 +1,11 @@
 import csv
 import datetime
+import os
 import random
 import re
 import time
 import warnings
+import wget
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -33,7 +35,11 @@ else:
 
 print('Loading the dataset...')
 
-df = pd.read_csv('../data/SemEval2018-T3-train-taskB.txt', delimiter='\t', index_col=0,
+url = 'https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/train/SemEval2018-T3-train-taskB.txt'
+if not os.path.exists('./SemEval2018-T3-train-taskB.txt'):
+    wget.download(url, './SemEval2018-T3-train-taskB.txt')
+
+df = pd.read_csv('./SemEval2018-T3-train-taskB.txt', delimiter='\t', index_col=0,
                  header=0, names=['label', 'tweet'], quoting=csv.QUOTE_NONE,
                  error_bad_lines=False)[['tweet', 'label']]
 
@@ -264,7 +270,12 @@ plt.ylabel('Loss')
 
 plt.show()
 
-df = pd.read_csv('../data/SemEval2018-T3_gold_test_taskB_emoji.txt', delimiter='\t', index_col=0,
+url = 'https://raw.githubusercontent.com/dearden/SemEval2018-Irony/master/SemEval2018-T3_gold_test_taskB_emoji.txt'
+if not os.path.exists('./SemEval2018-T3_gold_test_taskB_emoji.txt'):
+    wget.download(url, './SemEval2018-T3_gold_test_taskB_emoji.txt')
+
+
+df = pd.read_csv('./SemEval2018-T3_gold_test_taskB_emoji.txt', delimiter='\t', index_col=0,
                  header=0, names=['label', 'tweet'], quoting=csv.QUOTE_NONE,
                  error_bad_lines=False)[['tweet', 'label']]
 
@@ -347,11 +358,11 @@ flat_df_columns = pd.Index(["predictions", "true_labels"], name="columns")
 flat_df = pd.DataFrame(data=np.array([flat_predictions, flat_true_labels]).T, columns=flat_df_columns)
 flat_df.to_csv("predictions-true_labels.csv", index=False)
 
-for i in [0,1,2,3]:
+for i in [0, 1, 2, 3]:
     _df = flat_df[flat_df['true_labels'] == i]
     print("{:.2f}".format(accuracy_score(_df['true_labels'], _df['predictions'])))
 
-precision = precision_score(flat_true_labels, flat_predictions, average=None, labels=[0,1,2,3])
+precision = precision_score(flat_true_labels, flat_predictions, average=None, labels=[0, 1, 2, 3])
 precision_macro = precision_score(flat_true_labels, flat_predictions, average='macro')
 precision_weighted = precision_score(flat_true_labels, flat_predictions, average='weighted')
 
@@ -359,7 +370,7 @@ print(["{:.2f}".format(p) for p in precision])
 print("{:.2f}".format(precision_macro))
 print("{:.2f}".format(precision_weighted))
 
-recall = recall_score(flat_true_labels, flat_predictions, average=None, labels=[0,1,2,3])
+recall = recall_score(flat_true_labels, flat_predictions, average=None, labels=[0, 1, 2, 3])
 recall_macro = recall_score(flat_true_labels, flat_predictions, average='macro')
 recall_weighted = recall_score(flat_true_labels, flat_predictions, average='weighted')
 
@@ -367,7 +378,7 @@ print(["{:.2f}".format(r) for r in recall])
 print("{:.2f}".format(recall_macro))
 print("{:.2f}".format(recall_weighted))
 
-f1 = f1_score(flat_true_labels, flat_predictions, average=None, labels=[0,1,2,3])
+f1 = f1_score(flat_true_labels, flat_predictions, average=None, labels=[0, 1, 2, 3])
 f1_macro = f1_score(flat_true_labels, flat_predictions, average='macro')
 f1_weighted = f1_score(flat_true_labels, flat_predictions, average='weighted')
 
@@ -375,7 +386,7 @@ print(["{:.2f}".format(f) for f in f1])
 print("{:.2f}".format(f1_macro))
 print("{:.2f}".format(f1_weighted))
 
-cm = confusion_matrix(flat_true_labels, flat_predictions, labels=[0,1,2,3])
+cm = confusion_matrix(flat_true_labels, flat_predictions, labels=[0, 1, 2, 3])
 print(cm)
 
 matplotlib.rcParams.update(matplotlib.rcParamsDefault)
@@ -408,4 +419,3 @@ fig.tight_layout()
 plt.show()
 
 fig.savefig("cm.png")
-

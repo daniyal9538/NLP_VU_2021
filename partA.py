@@ -4,6 +4,7 @@ import csv
 from spacy import displacy
 from collections import Counter
 
+
 def frequencies(nlp, dataset):
     # set up counters
     num_words = 0
@@ -59,8 +60,10 @@ def frequencies(nlp, dataset):
 
     return POS_frequencies_coarse, POS_frequencies_fine, token_count_dict
 
+
 def pos_tagging(POS_frequencies_coarse, POS_frequencies_fine, token_count_dict):
-    word_frequency_df = pd.DataFrame.from_dict(token_count_dict, orient='index').reset_index() # df of frequencies per word + corresponding POS tag
+    word_frequency_df = pd.DataFrame.from_dict(token_count_dict,
+                                               orient='index').reset_index()  # df of frequencies per word + corresponding POS tag
     common_tags = POS_frequencies_fine.most_common(10)
     print(common_tags)
 
@@ -68,8 +71,9 @@ def pos_tagging(POS_frequencies_coarse, POS_frequencies_fine, token_count_dict):
         print(tag)
         df_tag = word_frequency_df.loc[word_frequency_df['POS_tag_fine'] == tag].sort_values(by='count',
                                                                                              ascending=False)
-        print(df_tag.iloc[:3]) # print three most occuring tokens
-        print(df_tag.iloc[-1]) # print least occuring token
+        print(df_tag.iloc[:3])  # print three most occuring tokens
+        print(df_tag.iloc[-1])  # print least occuring token
+
 
 def lemmatization(dataset, nlp):
     for index, tweet in dataset['Tweet text'].iloc[:100].iteritems():
@@ -77,7 +81,7 @@ def lemmatization(dataset, nlp):
 
         for sentence in doc.sents:
             for token in sentence:
-                if token.text != token.lemma_: # only print if the lemma of token is not equal to displayed token
+                if token.text != token.lemma_:  # only print if the lemma of token is not equal to displayed token
                     print(token.text, token.lemma_, sentence)
 
 
@@ -102,14 +106,18 @@ def named_entity_recognition(dataset, nlp):
             print(ent.text, ent.label_)
         # displacy.render(doc, style='ent')
 
+
 def main():
     nlp = spacy.load('en_core_web_sm')
-    dataset = pd.read_csv("https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/train/SemEval2018-T3-train-taskB.txt", delimiter='\t',
-                          quoting=csv.QUOTE_NONE, error_bad_lines=False)
+    dataset = pd.read_csv(
+        "https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/master/datasets/train/SemEval2018-T3-train-taskB.txt",
+        delimiter='\t',
+        quoting=csv.QUOTE_NONE, error_bad_lines=False)
     POS_frequencies_coarse, POS_frequencies_fine, token_count_dict = frequencies(nlp, dataset)
     pos_tagging(POS_frequencies_coarse, POS_frequencies_fine, token_count_dict)
     lemmatization(dataset, nlp)
     named_entity_recognition(dataset, nlp)
+
 
 if __name__ == '__main__':
     main()

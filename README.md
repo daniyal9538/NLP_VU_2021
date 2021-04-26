@@ -1,16 +1,12 @@
 # Intro to NLP: Assignment 1
 
-Authors:
+Authors: Jaimie R. Rutgers, Roberto Schiavone, Daniyal Selani
 
 ## Requirements
-To keep intact the output of
-```
-python -m pip freeze > requirements.txt
-```
-
-we are listing here the hardware requirements:
-- Python 3.9
+Requirements:
+- Python 3.9.4
 - CUDA 11.1
+- an Internet connection
 
 ## Environment
 ### (Optional) Create a virtual environment
@@ -29,8 +25,8 @@ python -m pip install -r requirements.txt
 ```
 
 ## Structure
-### Part A
 
+### Part A
 In addition to module dependencies, part A requires the download of the spaCy
 model **"en_core_web_sm"**. In case the download didn't start automatically by
 installing the requirements, run:
@@ -44,23 +40,39 @@ followed by
 ```
 python partA.py
 ```
-This script outputs all relevant results for part A of the assignment. For the POS tagging, the script first prints the 10 most common POS tags with their corresponding frequency. Next, the three most common and one of the least common tokens is printed, per POS tag. For the lemmatization, the script outputs the lemma and the token for the first 100 sentences. It requires manual work to choose a lemma with three different inflections. 
-### Part B
+This script outputs all relevant results for part A of the assignment. For the
+POS tagging, the script first prints the 10 most common POS tags with their
+corresponding frequency. Next, the three most common and one of the least common
+tokens is printed, per POS tag. For the lemmatization, the script outputs the
+lemma and the token for the first 100 sentences. It requires manual work to
+choose a lemma with three different inflections. 
 
-Executing the file as a python script will print out appropriate output to the python console with explanatory messages, that relate directly to the corresponding section in the report
+### Part B
+Executing the file as a python script will print out appropriate output to the
+python console with explanatory messages, that relate directly to the
+corresponding section in the report.
+
+As an additional dependency, you need to install PyTorch (not included in the
+`requirements.txt` because the CUDA version could not be specified there).
+
+```
+python -m pip install torch==1.8.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+Now, you can run:
 
 ```
 python partB.py
 ```
 
 ### Part C
+This script is just a modified version of the original BERT notebook, tweaked
+to accomodate the needs of the task. The script will output one file for the
+confusion matrix and one containing true and predicted labels.
 
-# IRONY DATASET AND TEST SET HERE
+As before, it is sufficient to run:
 
 ```
 python partC.py
 ```
 
-_Remarks: due to the file size of the datasets and the fine-tuned models, we
-decided to attach only to code and the data required to reproduce our results,
-without any additional models or outputs._
