@@ -75,3 +75,7 @@ As before, it is sufficient to run:
 python partC.py
 ```
 
+During the execution, the detailed level of logging will help with the
+interpretation of every step, and at the end of the script every measure will
+be output in the `stdout`.
+
