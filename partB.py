@@ -17,7 +17,7 @@ nlp = spacy.load('en_core_web_sm')
 
 #read file
 def downloadData():
-    url = 'https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/543ae83b0b093ab7ff4f2891ab7bccf6721d7e6d/datasets/train/SemEval2018-T3-train-taskB.txt'
+    url = 'https://raw.githubusercontent.com/Cyvhee/SemEval2018-Task3/543ae83b0b093ab7ff4f2891ab7bccf6721d7e6d/datasets/test_TaskB/SemEval2018-T3_gold_test_taskB_emoji.txt'
 
     # Download the file (if we haven't already)
     if not os.path.exists('./SemEval2018-T3-train-taskB.txt'):
